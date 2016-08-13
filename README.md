@@ -1,6 +1,6 @@
 # Discord Widget
 ## Code Snippet
-    <script type="text/javascript" src="http://discord.deliriousdrunkards.com/discord.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/discord-widget/1.0/discord-widget.min.js"></script>
     <script type="text/javascript">
         discordWidget.init({
             serverId: '51143782082543616',
