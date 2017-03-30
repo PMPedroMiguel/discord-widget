@@ -153,56 +153,59 @@ var discordWidget = discordWidget || (function(){
           usersElement = $('.discord-users-online')[0];
           joinElement = $('.discord-join')[0];
 
-          if (p.alphabetical) {
-            channels = [];
-            hiddenChannels = [];
-            for (var i = 0; i < d.channels.length; i++) {
-              hideChannel = false;
-              for (var j = 0; j < p.hideChannels.length; j++) {
+          if(typeof(p.hideChannels) !== 'boolean' || !p.hideChannels) {
+            if (p.alphabetical) {
+              channels = [];
+              hiddenChannels = [];
+              for (var i = 0; i < d.channels.length; i++) {
+                hideChannel = false;
+                for (var j = 0; j < p.hideChannels.length; j++) {
+                    if (d.channels[i].name.indexOf(p.hideChannels[j]) >= 0){
+                    hideChannel = true;
+                  }
+                }
+                if (!hideChannel) {
+                  channels.push(d.channels[i]);
+                } else {
+                  hiddenChannels.push(d.channels[i].id);
+                }
+              }
+
+              for (var i = 0; i < channels.length; i++) {
+                formatted += renderChannel(channels[i].name);
+                for (var j = 0; j < d.members.length; j++) {
+                  formatted += renderUser(d.members[j], channels[i].id);
+                }
+                formatted += '</ul>';
+              }
+            } else {
+              channels = [];
+              hiddenChannels = [];
+              for (var i = 0; i < d.channels.length; i++) {
+                hideChannel = false;
+                for (var j = 0; j < p.hideChannels.length; j++) {
                   if (d.channels[i].name.indexOf(p.hideChannels[j]) >= 0){
-                  hideChannel = true;
+                    hideChannel = true;
+                  }
+                }
+                if (!hideChannel) {
+                  channels.push(d.channels[i]);
+                } else {
+                  hiddenChannels.push(d.channels[i].id);
                 }
               }
-              if (!hideChannel) {
-                channels.push(d.channels[i]);
-              } else {
-                hiddenChannels.push(d.channels[i].id);
-              }
-            }
+              channels.sort(sortChannels);
 
-            for (var i = 0; i < channels.length; i++) {
-              formatted += renderChannel(channels[i].name);
-              for (var j = 0; j < d.members.length; j++) {
-                formatted += renderUser(d.members[j], channels[i].id);
-              }
-              formatted += '</ul>';
-            }
-          } else {
-            channels = [];
-            hiddenChannels = [];
-            for (var i = 0; i < d.channels.length; i++) {
-              hideChannel = false;
-              for (var j = 0; j < p.hideChannels.length; j++) {
-                if (d.channels[i].name.indexOf(p.hideChannels[j]) >= 0){
-                  hideChannel = true;
+              for (var i = 0; i < channels.length; i++) {
+                formatted += renderChannel(channels[i].name);
+                for (var j = 0; j < d.members.length; j++) {
+                  formatted += renderUser(d.members[j], channels[i].id);
                 }
+                formatted += '</ul>';
               }
-              if (!hideChannel) {
-                channels.push(d.channels[i]);
-              } else {
-                hiddenChannels.push(d.channels[i].id);
-              }
-            }
-            channels.sort(sortChannels);
-
-            for (var i = 0; i < channels.length; i++) {
-              formatted += renderChannel(channels[i].name);
-              for (var j = 0; j < d.members.length; j++) {
-                formatted += renderUser(d.members[j], channels[i].id);
-              }
-              formatted += '</ul>';
             }
           }
+
 
           if (p.showAllUsers) {
             formatted += '<li class="discord-channel discord-allusers-toggle">&#9662; Online Users</li><ul class="discord-userlist discord-allusers">';
