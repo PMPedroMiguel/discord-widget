@@ -1,6 +1,6 @@
 var discordWidget = discordWidget || (function(){
   var _params = {};
-  var version = '1.0';
+  var version = '1.1';
 
   return {
     init : function(Params) {
@@ -51,7 +51,7 @@ var discordWidget = discordWidget || (function(){
           default:
           themeFile = 'light.min.css';
         }
-        $('head').append('<link rel="stylesheet" href="http://discord.deliriousdrunkards.com/' + themeFile + '" type="text/css" />');
+        $('head').append('<link rel="stylesheet" href="//cdn.jsdelivr.net/discord-widget/' + version + '/' + themeFile + '" type="text/css" />');
 
         var url = 'https://discordapp.com/api/servers/' + _params.serverId + '/embed.json';
 
