@@ -24,11 +24,16 @@ For more details, go [here](http://discord.deliriousdrunkards.com/).
 ![](http://i.imgur.com/6zRoK2V.png)
 
 ## Changelog
+#### 1.1
+##### New Features
+* Added option to hide all channels and only show online users. (hideChannels: true)
+
+
 #### 1.0
 ##### New Features
 * Added version info to the widget to make troubleshooting issues on user sites easier.
 * Started this changelog.
- 
+
 ##### Bug Fixes
 * N/A
 
